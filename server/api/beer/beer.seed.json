@@ -1,0 +1,16 @@
+[
+	{
+		"beer": "testbeer1",
+		"brewery": "testbrewery1",
+		"description": "I like dat beer pls",
+		"abv": 99.9,
+		"rating": 5
+	},
+	{
+		"beer": "testbeer2",
+		"brewery": "testbrewery2",
+		"description": "I no like dat beer",
+		"abv": 0.001,
+		"rating": 0
+	}
+]
