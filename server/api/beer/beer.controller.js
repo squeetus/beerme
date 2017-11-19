@@ -20,11 +20,19 @@ exports.index = function(req, res) {
 
 // Get a single beer review
 exports.show = function(req, res) {
-  Beer.findById(req.params.id, function (err, beer) {
-    if(err) { return handleError(res, err); }
-    if(!beer) { return res.status(404).send('Not Found'); }
-    return res.json(beer);
-  });
+  Beer.find({beer: req.params.name},
+            {__v: 0, _id: 0})
+    .lean()
+    .exec(function (err, beer) {
+      if(err) { return handleError(res, err); }
+      if(!beer) { return res.status(404).send('Not Found'); }
+      var opts = {};
+
+      opts.title = "Hi, beer";
+      opts.beer = beer[0];
+      
+      return res.render('onebeer', {data: opts});
+    });
 };
 
 // Creates a new beer review in the DB.

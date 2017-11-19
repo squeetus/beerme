@@ -1,0 +1,6 @@
+div.onebeer
+  p I'm a beer
+  script.
+    -console.log(!{JSON.stringify(data.beer)})
+  each val, key in data.beer
+   div.attr #{key}: #{val}

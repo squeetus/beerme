@@ -4,6 +4,7 @@
 		"brewery": "testbrewery1",
 		"description": "I like dat beer pls",
 		"abv": 99.9,
+		"imgname": "foundersbreakfaststout.jpg",
 		"rating": 5
 	},
 	{
@@ -11,6 +12,7 @@
 		"brewery": "testbrewery2",
 		"description": "I no like dat beer",
 		"abv": 0.001,
+		"imgname": "testbrewery2_testbeer2.jpg",
 		"rating": 0
 	}
 ]

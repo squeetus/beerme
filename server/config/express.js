@@ -14,6 +14,8 @@ var errorHandler = require('errorhandler');
 var path = require('path');
 var config = require('./environment');
 
+
+
 module.exports = function(app) {
   var env = app.get('env');
 
@@ -22,7 +24,12 @@ module.exports = function(app) {
   app.use(bodyParser.json());
   app.use(methodOverride());
   app.use(cookieParser());
-  
+
+  app.set('views', __dirname + './../api/beer/views');
+  app.set('view engine', 'pug');
+
+  app.use(express.static(__dirname + '/../public'));
+
   if ('production' === env) {
     app.use(morgan('dev'));
   }

@@ -5,18 +5,14 @@ var mongoose = require('mongoose'),
 
 var BeerSchema = new Schema({
   beer: String,
+  style: String,
   brewery: String,
+  brewery_loc: String,
   description: String,
   abv: Number,
   rating: Number,
+  imgname: String,
   date_of_drink: { type: Date, default: Date.now() }
 });
-
-BeerSchema
-    .virtual('imgname')
-    .set(function(beer, brewery) {
-        this.imgname = brewery + "_" + beer;
-    })
-    .get(function() { return this.imgname; });
 
 module.exports = mongoose.model('Beer', BeerSchema);
