@@ -1,8 +1,32 @@
 var Grid = require('gridfs-stream');
+var fs = require("fs");
 
-module.exports = function(app, mongoose) {
-  var GridFS = Grid(mongoose.connection.db, mongoose.mongo);
+module.exports = function() {
+
   var grid = {};
+  var GridFS;
+
+  grid.setupConnection = function(app, mongoose) {
+      GridFS = Grid(mongoose.connection.db, mongoose.mongo);
+
+      app.use('/test', function(req, res) {
+        putFile(process.cwd() + "/server/public/img/foundersbreakfaststout.jpg", "foundersbreakfaststout.jpg", function(err, file) {
+        console.log(err, file);
+        });
+      });
+
+      app.use('/get/:name', function(req, res) {
+        try {
+            var readstream = GridFS.createReadStream({filename: req.params.name});
+            res.set('Content-Type', 'image/jpg');
+            return readstream.pipe(res);
+        } catch (err) {
+            console.error(err);
+            return next(errors.create(404, "File not found."));
+        }
+      });
+  };
+
   grid.putFile = function(path, name, callback) {
       var writestream = GridFS.createWriteStream({
           filename: name
@@ -12,34 +36,17 @@ module.exports = function(app, mongoose) {
       });
       fs.createReadStream(path).pipe(writestream);
   };
+
   grid.getFile = function(req, res, next){
     try {
-  			var readstream = GridFS.createReadStream({filename: req.params.file});
+  			var readstream = GridFS.createReadStream({filename: req.params.name});
   			res.set('Content-Type', 'image/jpg');
-  			return readstream.pipe(res);
+  			readstream.pipe(res);
   	} catch (err) {
   			console.error(err);
   			return next(errors.create(404, "File not found."));
   	}
   };
-
-
-  app.use('/test', function(req, res) {
-  	putFile(process.cwd() + "/server/public/img/foundersbreakfaststout.jpg", "foundersbreakfaststout.jpg", function(err, file) {
-  	console.log(err, file);
-  	});
-  });
-
-  app.use('/get/:file', function(req, res) {
-    try {
-  			var readstream = GridFS.createReadStream({filename: req.params.file});
-  			res.set('Content-Type', 'image/jpg');
-  			return readstream.pipe(res);
-  	} catch (err) {
-  			console.error(err);
-  			return next(errors.create(404, "File not found."));
-  	}
-  });
 
   return grid;
 };

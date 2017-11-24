@@ -20,7 +20,7 @@ exports.index = function(req, res) {
 
 // Get a single beer review
 exports.show = function(req, res) {
-  Beer.find({beer: req.params.name},
+  Beer.findOne({beer: req.params.name},
             {__v: 0, _id: 0})
     .lean()
     .exec(function (err, beer) {
@@ -29,8 +29,10 @@ exports.show = function(req, res) {
       var opts = {};
 
       opts.title = "Hi, beer";
-      opts.beer = beer[0];
-      
+      opts.beer = beer;
+      console.log(beer);
+      opts.img = beer.imgname;
+
       return res.render('onebeer', {data: opts});
     });
 };

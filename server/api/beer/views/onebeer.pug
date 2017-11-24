@@ -1,6 +1,7 @@
 div.onebeer
   p I'm a beer
+  img#beerpic(src="/get/"+ data.img, style="max-width: 500px")
   script.
     -console.log(!{JSON.stringify(data.beer)})
   each val, key in data.beer
-   div.attr #{key}: #{val}
+    div.attr #{key}: #{val}

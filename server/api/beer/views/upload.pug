@@ -6,11 +6,13 @@ html(lang="en" class="no-js")
         title=title
 
         link(rel='stylesheet', href='/css/bootstrap.min.css')
+        link(rel='stylesheet', href='/css/upload.css')
         link(rel='stylesheet', href='/css/header.css')
         link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css")
         script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js')
         script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js')
         script(src='https://d3js.org/d3.v3.min.js')
+        script(src="/js/upload.js")
 
         block css
         block js
@@ -19,4 +21,59 @@ html(lang="en" class="no-js")
 
     body
       .container
-          h1 hey upload pls!
+          div.row
+            div.col-xs-12
+              div.panel.panel-default
+                div.panel-body
+                  span.glyphicon.glyphicon-cloud-upload
+                  h2 Upload dat shit
+                  label.col-md-6.col-md-offset-3.control-label(style="padding:25px") BEER REVIEW
+
+
+
+                  div.col-md-6.col-md-offset-3
+                    label.col-md-2.control-label(for="date") Date
+                    div.form-group.col-md-10
+                      input#date.form-control(type="date" name="date")
+                    label.col-md-2.control-label(for="beer") Beer Name
+                    div.form-group.col-md-10
+                      input#beer.form-control(type="text" name="beer")
+                    label.col-md-2.control-label(for="style") Style
+                    div.form-group.col-md-10
+                      input#style.form-control(type="text" name="style")
+                    label.col-md-2.control-label(for="abv") ABV
+                    div.form-group.col-md-10
+                      div.col-md-2(style="padding: 0px")
+                        input#abv.form-control(type="number" name="abv" min="0")
+
+                    div.col-md-12(style=("height: 25px"))
+
+
+                    label.col-md-2.control-label(for="brewery") Brewery
+                    div.form-group.col-md-10
+                        input#brewery.form-control(type="text" name="brewery")
+                    label.col-md-2.control-label(for="brewery_loc") Brewery Location
+                    div.form-group.col-md-10
+                        input#brewery_loc.form-control(type="text" name="brewery_loc")
+
+                    div.col-md-12(style=("height: 25px"))
+
+
+                    label.col-md-2.control-label(for="description") Description
+                    div.form-group.col-md-10
+                      textarea#description.form-control(rows="5" name="description")
+                    label.col-md-2.control-label(for="rating") Rating
+                    div.form-group.col-md-10
+                      div.col-md-2(style="padding: 0px")
+                        input#rating.form-control(type="number" name="rating" min="0" max="5")
+
+                    div.col-md-12(style=("height: 25px"))
+
+
+                    div.progress.col-md-12
+                      div.progress-bar(role="progressbar")
+                    button#addimg.upload-btn.btn.btn-lg(type="button") Grab image and go!
+
+
+
+          input#upload-input(type="file", name="uploads[]")

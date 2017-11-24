@@ -28,7 +28,8 @@ var app = express();
 
 var server = require('http').createServer(app);
 require('./config/express')(app);
-var gridfs = require('./config/gridfs')(app, mongoose);
+var gridfs = require('./config/gridfs')();
+gridfs.setupConnection(app, mongoose);
 require('./routes')(app, gridfs);
 
 
