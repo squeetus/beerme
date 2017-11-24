@@ -30,7 +30,6 @@ exports.show = function(req, res) {
 
       opts.title = "Hi, beer";
       opts.beer = beer;
-      console.log(beer);
       opts.img = beer.imgname;
 
       return res.render('onebeer', {data: opts});

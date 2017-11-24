@@ -11,7 +11,7 @@ var BeerSchema = new Schema({
   description: String,
   abv: Number,
   rating: Number,
-  imgname: String,
+  imgname: {type: String, unique: true},
   date_of_drink: { type: Date, default: Date.now() }
 });
 
