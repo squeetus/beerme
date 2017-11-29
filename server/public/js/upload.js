@@ -16,17 +16,10 @@ $(document).ready(function() {
 
       // (validate and) add other attributes to the form
       var review = {};
-      // ratingdata.beer = $("#beer").val();
-      // ratingdata.style = $("#style").val();
-      // ratingdata.brewery = $("#brewery").val();
-      // ratingdata.brewery_loc = $("#brewery_loc").val();
-      // ratingdata.description = $("#description").val();
-      // ratingdata.abv = $("#abv").val();
-      // ratingdata.rating = $("#beer").rating();
-      // ratingdata.date = $("#date").val();
       $('input.form-control').each(function() {
           review[$(this).attr('name')] = $(this).val();
       });
+      review.description = $('#description').val();
 
       formData.append('review', JSON.stringify(review));
 
