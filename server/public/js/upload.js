@@ -1,28 +1,47 @@
 $(document).ready(function() {
-  $('.upload-btn').on('click', function (){
+  $('#addimg').on('click', function (){
       $('#upload-input').click();
       $('.progress-bar').text('0%');
       $('.progress-bar').width('0%');
   });
 
-  $('#upload-input').on('change', function(){
+  $("#upload-input").on('change', function() {
+    if(this.files.length == 1) {
+      console.log('ok');
+      $('#addimg').html('OK!');
+    }
+    else {
+      alert("OOP, couldn't find the image. Try again!");
+    }
+  });
 
-    var files = $(this).get(0).files;
+  $('#upload').on('click', function(){
 
-    if (files.length > 0){
+    var files = $('#upload-input').get(0).files;
+
+    if (files.length !== 1){
+      alert("Grab an image, fool");
+    } else {
       // create a FormData object which will be sent as the data payload in the
       // AJAX request
       var formData = new FormData();
+      var keepGoing = true;
 
       // (validate and) add other attributes to the form
       var review = {};
       $('input.form-control').each(function() {
+          if($(this).val() === "") {
+            alert("AHHHHH " + $(this).attr('name') + " needs a value pls sir");
+            keepGoing = false;
+            return false;
+          }
           review[$(this).attr('name')] = $(this).val();
       });
       review.description = $('#description').val();
 
-      formData.append('review', JSON.stringify(review));
+      if(!keepGoing) return false;
 
+      formData.append('review', JSON.stringify(review));
 
       // loop through all the selected files and add them to the formData object
       for (var i = 0; i < files.length; i++) {
